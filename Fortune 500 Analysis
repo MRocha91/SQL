@@ -73,8 +73,8 @@ ORDER BY avg_employee_tenure ASC;
 --or assigns all companies that don't offer Health Care as "No Health Care Benefits"
 SELECT company_name, 
 CASE 
-	WHEN healthcare_benefits >=1 THEN "Has Health Care Benefits"
-	ELSE 'No Health Care Benefits'
+  WHEN healthcare_benefits >=1 THEN "Has Health Care Benefits"
+  ELSE 'No Health Care Benefits'
 END AS Offers_Health_Care_Benefits
 FROM fortune_companies
 WHERE healthcare_benefits= 0 OR 1
@@ -83,7 +83,7 @@ ORDER BY healthcare_benefits DESC;
 
 --Displays which industries have at least 100,000 employees, and what their total employee number is,
 --and then orders them in ascending order
-SELECT industry, ROUND(SUM(employees),1) AS total_employees
+SELECT industry, SUM(employees) AS total_employees
 FROM fortune_companies
 GROUP BY industry 
 HAVING total_employees>=100000
