@@ -126,8 +126,10 @@ INSERT INTO hotels VALUES
  , (3, 'Four Season''s', '900 Winter Road, Cityville, PA')
  ;
 
+
 # Analysis: 
 
+LEFT JOIN : Lists all VIPs, and the name of the event they are attending, including VIPs who did not attend an event. 
 SELECT vips.last_name
 , vips.first_name
 , events.event_name
@@ -136,6 +138,7 @@ LEFT JOIN events
 ON vips.event = events.event_id
 ;
 
+MULTIPLE JOINs: Only lists VIPs who have made a reservation, their associated hotel reservations, and their member id. 
 SELECT vips.last_name
 , vips.first_name
 , hotels.hotel_name
@@ -147,6 +150,7 @@ INNER JOIN hotels
 ON reservations.hotel = hotels.hotel_id
 ;
 
+MULTIPLE JOINs with Subquery : Only lists VIPs who are attending an event, the event type, have a hotel reservation, the hotel name, and if their association type is government. 
 SELECT vips.last_name
 , vips.first_name 
 , events.event_name
@@ -164,7 +168,7 @@ WHERE vips.assoc_type LIKE "government"
 ORDER BY vips.last_name
 ;
 
-
+SELF JOIN: Find VIPs who provide feedback to others and the corresponding VIPs who receive their feedback, and orders them by their last name. 
 SELECT giver.first_name AS Feedback_Giver_FN , giver.last_name AS Feedback_Giver_LN
 , receiver.first_name AS receiver_first_name , receiver.last_name AS receiver_last_name
 FROM vips AS giver
@@ -173,6 +177,7 @@ ON giver.provides_feedback_to = receiver.member_id
 ORDER BY giver.last_name
 ;
 
+CUSTOM Query - MULTIPLE JOINs with Subquery: Lists all VIPs who have been members longer than 5 years, and the hotel they are staying at, including VIPs not staying at a hotel, and orders them by their member year
 SELECT vips.first_name
 , vips.last_name
 , hotels.hotel_name
@@ -186,6 +191,7 @@ WHERE vips.member_since <= 2020
 ORDER BY vips.member_since
 ;
 
+CUSTOM Query - INNER JOIN with Subquery : Lists VIPs who have only have a reservation to one of the RSVPs but not to both. 
 SELECT vips.first_name
 , vips.last_name
 , reservations.welcome_rsvp
